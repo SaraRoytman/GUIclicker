@@ -1,87 +1,68 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GUI implements ActionListener {
-    private int count = 0;
-    private JLabel label;
+public class GUI {
     private JFrame frame;
-    private JPanel panel;
     private JButton button;
+    private int count = 0;
 
     public GUI() {
+        // יצירת החלון הראשי
         frame = new JFrame("Character Clicker");
 
+        String buttonText = "CLICK THE CAT!! 🐱";
 
-        String path = "C:\\Users\\sara2\\Downloads\\character.jpg";
+        String path = "src/character.jpg";
         ImageIcon charIcon = new ImageIcon(path);
 
         if (charIcon.getIconWidth() == -1) {
-            button = new JButton("Click here!");
-        }
-        else {
+            button = new JButton(buttonText);
+        } else {
             Image image = charIcon.getImage();
             Image newimg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
             charIcon = new ImageIcon(newimg);
 
-            button = new JButton("click me!", charIcon);
+            button = new JButton(buttonText, charIcon);
 
             button.setVerticalTextPosition(SwingConstants.TOP);
             button.setHorizontalTextPosition(SwingConstants.CENTER);
-            button.setFont(new Font("Arial", Font.BOLD, 14));
-            button.setForeground(Color.WHITE);
-
-            button.setBackground(new Color(0x147064));
-
-            button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
-
-            button.setContentAreaFilled(true);
-            button.setOpaque(true);
-            button.setBorderPainted(false);
-            button.setFocusPainted(false);
-
-            button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
-        button.addActionListener(this);
 
-        // --- הגדרות הלייבל (הטקסט) ---
-        label = new JLabel("Number of clicks: 0");
+        button.setFont(new Font("Segoe UI Emoji", Font.BOLD, 25));
 
-        // 1. קובע את סגנון וגודל הכתב
-        label.setFont(new Font("Arial", Font.BOLD, 22));
+        button.setForeground(Color.BLACK);
+        button.setBackground(Color.LIGHT_GRAY);
 
-        // 2. מרכוז הטקסט בתוך התיבה של הלייבל
-        label.setHorizontalAlignment(JLabel.CENTER);
+        button.addActionListener(e -> {
+            count++; // מעלה את הספירה ב-1
+            System.out.println("The cat was clicked! Total: " + count);
 
-        button.setAlignmentX(Component.CENTER_ALIGNMENT); // <--- מרכוז הכפתור
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);  // <--- מרכוז הלייבל
+            // שינוי הטקסט על הכפתור בזמן אמת
+            button.setText("You clicked " + count + " times! 🐱");
 
-        panel = new JPanel();
+            // בונוס: שינוי צבע לירוק בלחיצה (הצבע שאת אוהבת!) [cite: 2025-07-29]
+            button.setBackground(new Color(144, 238, 144));
+        });
 
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        // הגדרות למראה מודרני
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        button.setContentAreaFilled(true);
+        button.setOpaque(true);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // --- הוספה לפאנל לפי הסדר ---
-        panel.add(button); // יופיע ראשון (למעלה)
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // רווח של 20 פיקסלים
-        panel.add(label);  // יופיע מתחת לכפתור
-
-        frame.add(panel);
+        // הוספה לחלון
+        frame.setLayout(new FlowLayout());
+        frame.add(button);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 600);
+        frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new GUI());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        count++;
-        label.setText("Number of clicks: " + count);
+        new GUI();
     }
 }
