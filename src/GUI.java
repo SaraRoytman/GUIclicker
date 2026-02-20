@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class GUI {
@@ -36,12 +37,22 @@ public class GUI {
             count++;
             System.out.println("The cat was clicked! Total: " + count);
 
-            if(count > 5){
+            if(count == 5 || count == 6){
                 button.setText("WHY DID YOU DO THAT");
                 button.setBackground(Color.RED);
                 button.setForeground(Color.white);
             }
-            else{
+            else if(count == 7){
+                button.setText("why did you stop");
+                button.setBackground(Color.GREEN);
+                button.setForeground(Color.BLACK);
+
+            } else if (count > 7) {
+                button.setText("why didnt you stop");
+                button.setBackground(Color.RED);
+
+
+            } else{
                 button.setText("AGAIN!🐱");
                 button.setBackground(new Color(144, 238, 144));
 
@@ -49,15 +60,14 @@ public class GUI {
 
 
         });
-        // הגדרות למראה מודרני
+
         button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
         button.setContentAreaFilled(true);
         button.setOpaque(true);
-        button.setBorderPainted(false);
+        button.setBorder(new LineBorder(Color.white, 3, true));
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // הוספה לחלון
         frame.setLayout(new GridBagLayout());
         frame.getContentPane().setBackground(new Color(6, 19, 8));
         frame.add(button);
