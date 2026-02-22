@@ -36,15 +36,28 @@ public class GUI {
             count++;
             System.out.println("The cat was clicked! Total: " + count);
 
-            if(count > 5){
+            if(count > 7){
+                button.setText("why didnt you stop");
+                button.setBackground(Color.blue);
+                button.setForeground(Color.CYAN);
+
+            }
+
+            else if (count > 5) {
+                // זה המקרה הספציפי, לכן נשים אותו ראשון
+                button.setText("why did you stop");
+                button.setBackground(Color.orange);
+                button.setForeground(Color.black);
+            }
+            else if (count == 5) {
+                // זה יתפוס את 6, 8, 9 וכו', אבל לא את 7 (כי הוא כבר נתפס למעלה)
                 button.setText("WHY DID YOU DO THAT");
                 button.setBackground(Color.RED);
                 button.setForeground(Color.white);
             }
-            else{
+            else {
                 button.setText("AGAIN!🐱");
                 button.setBackground(new Color(144, 238, 144));
-
             }
 
 
