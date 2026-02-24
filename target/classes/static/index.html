@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Clicker</title>
+    <style>
+        body {
+            background-color: rgb(21, 53, 8); /* הרקע הכהה מה-GUI המקורי */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI Emoji', 'Segoe UI', sans-serif;
+        }
+
+        #click-button {
+            background-color: white;
+            color: black;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            padding: 30px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        #cat-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<button id="click-button" onclick="handleInteraction()">
+    <img src="character.jpg" id="cat-img" alt="cat">
+    <span id="btn-text">CLICK THE CAT!!🐱</span>
+</button>
+
+<script>
+    function handleInteraction() {
+        fetch('/api/click')
+            .then(response => response.text())
+            .then(count => {
+                updateUI(parseInt(count));
+            });
+    }
+
+    function updateUI(count) {
+        const btn = document.getElementById('click-button');
+        const txt = document.getElementById('btn-text');
+        const img = document.getElementById('cat-img');
+
+        // לוגיקה לפי הקוד ששלחת
+        if (count > 7) {
+            txt.innerText = "why didnt you stop";
+            btn.style.backgroundColor = "blue";
+            btn.style.color = "cyan";
+            img.style.display = "none"; // מחביא את התמונה
+        }
+        else if (count > 5) {
+            txt.innerText = "why did you stop";
+            btn.style.backgroundColor = "orange";
+            btn.style.color = "black";
+            img.style.display = "none"; // מחביא את התמונה
+        }
+        else if (count === 5) {
+            txt.innerText = "WHY DID YOU DO THAT";
+            btn.style.backgroundColor = "red";
+            btn.style.color = "white";
+            img.style.display = "none"; // מחביא את התמונה
+        }
+        else {
+            // בשלב ההתחלתי (לחיצות 1-4)
+            txt.innerText = "AGAIN!🐱";
+            btn.style.backgroundColor = "rgb(144, 238, 144)";
+            btn.style.color = "black";
+            img.style.display = "block"; // מראה את התמונה
+        }
+    }
+</script>
+</body>
+</html>
