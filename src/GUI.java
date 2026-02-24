@@ -7,7 +7,7 @@ public class GUI {
     private int count = 0;
 
     public GUI() {
-        // יצירת החלון הראשי
+
         frame = new JFrame("Character Clicker");
 
         String buttonText = "CLICK THE CAT!!🐱";
@@ -42,15 +42,12 @@ public class GUI {
                 button.setForeground(Color.CYAN);
 
             }
-
             else if (count > 5) {
-                // זה המקרה הספציפי, לכן נשים אותו ראשון
                 button.setText("why did you stop");
                 button.setBackground(Color.orange);
                 button.setForeground(Color.black);
             }
             else if (count == 5) {
-                // זה יתפוס את 6, 8, 9 וכו', אבל לא את 7 (כי הוא כבר נתפס למעלה)
                 button.setText("WHY DID YOU DO THAT");
                 button.setBackground(Color.RED);
                 button.setForeground(Color.white);
@@ -62,7 +59,7 @@ public class GUI {
 
 
         });
-        // הגדרות למראה מודרני
+
         button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
         button.setContentAreaFilled(true);
         button.setOpaque(true);
@@ -70,9 +67,8 @@ public class GUI {
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // הוספה לחלון
         frame.setLayout(new GridBagLayout());
-        frame.getContentPane().setBackground(new Color(6, 19, 8));
+        frame.getContentPane().setBackground(new Color(21, 53, 8));
         frame.add(button);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 350);
