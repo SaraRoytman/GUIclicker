@@ -1,1 +1,3 @@
-src/main/resources/static/** linguist-vendored
+# This file is used to configure Git attributes
+
+*.html linguist-detectable=false
