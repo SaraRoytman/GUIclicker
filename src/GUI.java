@@ -7,59 +7,20 @@ public class GUI {
     private int count = 0;
 
     public GUI() {
-
         frame = new JFrame("Character Clicker");
 
-        String buttonText = "CLICK THE CAT!!🐱";
+        // 1. הגדרת הטקסט ההתחלתי
+        String buttonText = "CLICK THE CAT!! 🐱";
 
-        String path = "src/character.jpg";
-        ImageIcon charIcon = new ImageIcon(path);
+        // 2. יצירת הכפתור (בלי שום ImageIcon)
+        button = new JButton(buttonText);
 
-        if (charIcon.getIconWidth() == -1) {
-            button = new JButton(buttonText);
-        } else {
-            Image image = charIcon.getImage();
-            Image newimg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-            charIcon = new ImageIcon(newimg);
-
-            button = new JButton(buttonText, charIcon);
-
-            button.setVerticalTextPosition(SwingConstants.CENTER);
-            button.setHorizontalTextPosition(SwingConstants.CENTER);
-        }
-
+        // 3. הגדרות עיצוב (פונט וצבעים)
         button.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));
         button.setForeground(Color.BLACK);
-        button.setBackground(Color.white);
+        button.setBackground(Color.WHITE);
 
-        button.addActionListener(e -> {
-            count++;
-            System.out.println("The cat was clicked! Total: " + count);
-
-            if(count > 7){
-                button.setText("why didnt you stop");
-                button.setBackground(Color.blue);
-                button.setForeground(Color.CYAN);
-
-            }
-            else if (count > 5) {
-                button.setText("why did you stop");
-                button.setBackground(Color.orange);
-                button.setForeground(Color.black);
-            }
-            else if (count == 5) {
-                button.setText("WHY DID YOU DO THAT");
-                button.setBackground(Color.RED);
-                button.setForeground(Color.white);
-            }
-            else {
-                button.setText("AGAIN!🐱");
-                button.setBackground(new Color(144, 238, 144));
-            }
-
-
-        });
-
+        // הגדרות למראה כפתור נקי ומודרני
         button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
         button.setContentAreaFilled(true);
         button.setOpaque(true);
@@ -67,16 +28,47 @@ public class GUI {
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        frame.setLayout(new GridBagLayout());
-        frame.getContentPane().setBackground(new Color(21, 53, 8));
+        // 4. לוגיקת הלחיצות והשינויים
+        button.addActionListener(e -> {
+            count++;
+            System.out.println("The cat was clicked! Total: " + count);
+
+            if (count > 7) {
+                button.setText("why didnt you stop");
+                button.setBackground(Color.BLUE);
+                button.setForeground(Color.CYAN);
+            }
+            else if (count > 5) {
+                button.setText("why did you stop");
+                button.setBackground(Color.ORANGE);
+                button.setForeground(Color.BLACK);
+            }
+            else if (count == 5) {
+                button.setText("WHY DID YOU DO THAT");
+                button.setBackground(Color.RED);
+                button.setForeground(Color.WHITE);
+            }
+            else {
+                button.setText("AGAIN! 🐱");
+                button.setBackground(new Color(144, 238, 144)); // ירוק בהיר
+                button.setForeground(Color.BLACK);
+            }
+        });
+
+        // 5. הגדרות החלון (JFrame)
+        frame.setLayout(new GridBagLayout()); // שומר על הכפתור במרכז
+        frame.getContentPane().setBackground(new Color(21, 53, 8)); // הרקע הירוק הכהה
+
         frame.add(button);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 350);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null); // מרכז את החלון על המסך
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new GUI();
+        // מריץ את ה-GUI בצורה בטוחה
+        SwingUtilities.invokeLater(() -> new GUI());
     }
 }
